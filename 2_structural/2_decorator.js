@@ -1,35 +1,93 @@
-class Server {
-	constructor(ip, port) {
-		this._ip = ip;
-		this.port = port;
+// class Server {
+// 	constructor(ip, port) {
+// 		this._ip = ip;
+// 		this.port = port;
+// 	}
+
+// 	get url() {
+// 		return `https://${this._ip}:${this.port}`;
+// 	}
+// }
+
+// function aws(server) {
+// 	server.isAWS = true;
+// 	server.awsInfo = () => {
+// 		return server.url;
+// 	};
+
+// 	return server;
+// }
+
+// function azure(server) {
+// 	server.isAzure = true;
+// 	server.port += 500;
+// 	return server;
+// }
+
+// const s1 = aws(new Server('12.23.34.45', 8080));
+
+// console.log(s1.isAWS);
+// console.log(s1.awsInfo());
+
+// const s2 = azure(new Server('23.34.45.56', 2500));
+
+// console.log(s2.isAzure);
+// console.log(s2.url);
+
+class Car {
+	constructor() {
+		this.price = 10000;
+		this.model = 'Car';
 	}
 
-	get url() {
-		return `https://${this._ip}:${this.port}`;
+	getPrice() {
+		return this.price;
+	}
+
+	getDescription() {
+		return this.model;
 	}
 }
 
-function aws(server) {
-	server.isAWS = true;
-	server.awsInfo = () => {
-		return server.url;
-	};
-
-	return server;
+class Tesla extends Car {
+	constructor() {
+		super();
+		this.price = 25000;
+		this.model = 'Tesla';
+	}
 }
 
-function azure(server) {
-	server.isAzure = true;
-	server.port += 500;
-	return server;
+class Autopilot {
+	constructor(car) {
+		this.car = car;
+	}
+
+	getPrice() {
+		return this.car.getPrice() + 5000;
+	}
+
+	getDescription() {
+		return `${this.car.getDescription()} with autopilot`;
+	}
 }
 
-const s1 = aws(new Server('12.23.34.45', 8080));
+class Parktronik {
+	constructor(car) {
+		this.car = car;
+	}
 
-console.log(s1.isAWS);
-console.log(s1.awsInfo());
+	getPrice() {
+		return this.car.getPrice() + 3000;
+	}
 
-const s2 = azure(new Server('23.34.45.56', 2500));
+	getDescription() {
+		return `${this.car.getDescription()} with parktronik`;
+	}
+}
 
-console.log(s2.isAzure);
-console.log(s2.url);
+let tesla = new Tesla();
+
+tesla = new Autopilot(tesla);
+tesla = new Parktronik(tesla);
+
+console.log(tesla.getPrice());

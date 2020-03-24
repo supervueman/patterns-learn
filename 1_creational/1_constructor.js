@@ -1,13 +1,28 @@
-class Server {
-	constructor(name, ip) {
-		this.name = name;
-		this.ip = ip;
+class CreateComponent {
+	constructor(selector, tag, text, style) {
+		this.selector = selector;
+		this.tag = tag;
+		this.text = text;
+		this.style = style;
+		this.component = undefined;
 	}
 
-	getUrl() {
-		return `https://${this.ip}:80`;
+	insert() {
+		const parent = document.querySelector(this.selector);
+
+		if (parent) {
+			this.component = document.createElement(this.tag);
+			this.component.innerHTML = this.text;
+
+			for (let key in this.style) {
+				this.component.style[key] = this.style[key];
+			}
+
+			parent.appendChild(this.component);
+		}
+	}
+
+	getComponent() {
+		return this.component;
 	}
 }
-
-const aws = new Server('aws German', '82.21.21.32');
-console.log(aws.getUrl());

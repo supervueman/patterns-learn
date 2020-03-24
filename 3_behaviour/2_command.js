@@ -1,32 +1,87 @@
-class MyMath {
-	constructor(initialValue) {
-		this.num = initialValue;
-	}
+// class MyMath {
+//   constructor(initialValue) {
+//     this.num = initialValue;
+//   }
 
-	square() {
-		return this.num ** 2;
-	}
+//   square() {
+//     return this.num ** 2;
+//   }
 
-	cube() {
-		return this.num ** 3;
-	}
+//   cube() {
+//     return this.num ** 3;
+//   }
+// }
+
+// class Command {
+//   constructor(subject) {
+//     this.subject = subject;
+//     this.commandsExecuted = [];
+//   }
+
+//   execute(command) {
+//     this.commandsExecuted.push(command);
+
+//     return this.subject[command]();
+//   }
+// }
+
+// const x = new Command(new MyMath(2));
+
+// console.log(x.execute('square'));
+// console.log(x.execute('cube'));
+// console.log(x.commandsExecuted);
+
+// ===================================
+
+class Driver {
+  constructor(command) {
+    this.command = command;
+  }
+
+  execute() {
+    this.command.execute();
+  }
 }
 
-class Command {
-	constructor(subject) {
-		this.subject = subject;
-		this.commandsExecuted = [];
-	}
+class Engine {
+  constructor() {
+    this.state = false;
+  }
 
-	execute(command) {
-		this.commandsExecuted.push(command);
+  on() {
+    this.state = true;
+  }
 
-		return this.subject[command]();
-	}
+  off() {
+    this.state = false;
+  }
 }
 
-const x = new Command(new MyMath(2));
+class OnStartCommand {
+  constructor(engine) {
+    this.engine = engine;
+  }
 
-console.log(x.execute('square'));
-console.log(x.execute('cube'));
-console.log(x.commandsExecuted);
+  execute() {
+    this.engine.on();
+  }
+}
+
+class OnSwitchOffCommand {
+  constructor(engine) {
+    this.engine = engine;
+  }
+
+  execute() {
+    this.engine.off();
+  }
+}
+
+const engine = new Engine();
+l(engine);
+
+const onStartCommand = new OnStartCommand(engine);
+const driver = new Driver(onStartCommand);
+driver.execute();
+
+l(engine);

@@ -1,37 +1,79 @@
-class Vehicle {
-	travelTime() {
-		return this.timeTaken;
-	}
+// class Vehicle {
+//   travelTime() {
+//     return this.timeTaken;
+//   }
+// }
+
+// class Bus extends Vehicle {
+//   constructor() {
+//     super();
+//     this.timeTaken = 10;
+//   }
+// }
+
+// class Taxi extends Vehicle {
+//   constructor() {
+//     super();
+//     this.timeTaken = 5;
+//   }
+// }
+
+// class Car extends Vehicle {
+//   constructor() {
+//     super();
+//     this.timeTaken = 3;
+//   }
+// }
+
+// class Commute {
+//   travel(transport) {
+//     return transport.travelTime();
+//   }
+// }
+
+// const commute = new Commute();
+
+// console.log(commute.travel(new Taxi()));
+// console.log(commute.travel(new Bus()));
+
+// ===================================
+
+function baseStrategy(amount) {
+  return amount;
 }
 
-class Bus extends Vehicle {
-	constructor() {
-		super();
-		this.timeTaken = 10;
-	}
+function premiumStrategy(amount) {
+  return amount * 0.85;
 }
 
-class Taxi extends Vehicle {
-	constructor() {
-		super();
-		this.timeTaken = 5;
-	}
+function platinumStrategy(amount) {
+  return amount * 0.65;
 }
 
-class Car extends Vehicle {
-	constructor() {
-		super();
-		this.timeTaken = 3;
-	}
+class AutoCart {
+  constructor(discount) {
+    this.discount = discount;
+    this.amount = 0;
+  }
+
+  checkout() {
+    return this.discount(this.amount);
+  }
+
+  setAmount(amount) {
+    this.amount = amount;
+  }
 }
 
-class Commute {
-	travel(transport) {
-		return transport.travelTime();
-	}
-}
+const baseCustomer = new AutoCart(baseStrategy);
+const premiumCustomer = new AutoCart(premiumStrategy);
+const platinumCustomer = new AutoCart(platinumStrategy);
 
-const commute = new Commute();
+baseCustomer.setAmount(50000);
+l(baseCustomer.checkout());
 
-console.log(commute.travel(new Taxi()));
-console.log(commute.travel(new Bus()));
+premiumCustomer.setAmount(50000);
+l(premiumCustomer.checkout());
+
+platinumCustomer.setAmount(50000);
+l(platinumCustomer.checkout());

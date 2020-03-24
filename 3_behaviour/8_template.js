@@ -1,45 +1,97 @@
-class Employee {
-	constructor(name, salary) {
-		this.name = name;
-		this.salary = salary;
-	}
+// class Employee {
+// 	constructor(name, salary) {
+// 		this.name = name;
+// 		this.salary = salary;
+// 	}
 
-	responsibilities() {}
+// 	responsibilities() {}
 
-	work() {
-		return `${this.name} doing ${this.responsibilities()}`;
-	}
+// 	work() {
+// 		return `${this.name} doing ${this.responsibilities()}`;
+// 	}
 
-	getPaid() {
-		return `${this.name} have salary ${this.salary}`;
-	}
+// 	getPaid() {
+// 		return `${this.name} have salary ${this.salary}`;
+// 	}
+// }
+
+// class Developer extends Employee {
+// 	constructor(name, salary) {
+// 		super(name, salary);
+// 	}
+
+// 	responsibilities() {
+// 		return 'programm creation process';
+// 	}
+// }
+
+// class Tester extends Employee {
+// 	constructor(name, salary) {
+// 		super(name, salary);
+// 	}
+
+// 	responsibilities() {
+// 		return 'programm testing';
+// 	}
+// }
+
+// const dev = new Developer('Rinat', 100000);
+// console.log(dev.getPaid());
+// console.log(dev.work());
+
+// const tester = new Tester('Viktoria', 90000);
+// console.log(tester.getPaid());
+// console.log(tester.work());
+
+// =========================================
+
+class Builder {
+  build() {
+    this.addEngine();
+    this.installChassis();
+    this.addElectronic();
+    this.collectAccessories();
+  }
 }
 
-class Developer extends Employee {
-	constructor(name, salary) {
-		super(name, salary);
-	}
+class TeslaBuilder extends Builder {
+  addEngine() {
+    l('Add electronic engine');
+  }
 
-	responsibilities() {
-		return 'programm creation process';
-	}
+  installChassis() {
+    l('Install Tesla chassis');
+  }
+
+  addElectronic() {
+    l('Add special electronic');
+  }
+
+  collectAccessories() {
+    l('Collect Accessories');
+  }
 }
 
-class Tester extends Employee {
-	constructor(name, salary) {
-		super(name, salary);
-	}
+class BmwBuilder extends Builder {
+  addEngine() {
+    l('Add BMW engine');
+  }
 
-	responsibilities() {
-		return 'programm testing';
-	}
+  installChassis() {
+    l('Install BMW chassis');
+  }
+
+  addElectronic() {
+    l('Add electronic');
+  }
+
+  collectAccessories() {
+    l('Collect Accessories');
+  }
 }
 
-const dev = new Developer('Rinat', 100000);
-console.log(dev.getPaid());
-console.log(dev.work());
+const teslaBuilder = new TeslaBuilder();
+const bmwBuilder = new BmwBuilder();
 
-
-const tester = new Tester('Viktoria', 90000);
-console.log(tester.getPaid());
-console.log(tester.work());
+teslaBuilder.build();
+bmwBuilder.build();

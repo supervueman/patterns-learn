@@ -1,3 +1,5 @@
+// Factory порождает новые (разные) ОДНОТИПНЫЕ объекты на основании входных данных
+
 class SimpleMembership {
 	constructor(name) {
 		this.name = name;
@@ -48,3 +50,23 @@ const members = [
 ];
 
 console.log(members);
+
+class Bmw {
+	constructor(model, price, maxSpeed) {
+		this.model = model;
+		this.price = price;
+		this.maxSpeed = maxSpeed;
+	}
+}
+
+class BmwFactory {
+	create(type) {
+		if (type === 'X5') return new Bmw('X5', 10000, 200);
+		if (type === 'X6') return new Bmw('X6', 20000, 300);
+	}
+}
+
+const factory1 = new BmwFactory();
+
+const bmwX5 = factory1.create('X5');
+const bmwX6 = factory1.create('X5');
